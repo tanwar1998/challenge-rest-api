@@ -28,7 +28,7 @@ const updatePricesByID = async(ctx, next) => {
     return {
         data: results?.rowCount ? {} : null ,
         status: results ? 'success': 'error',
-        error: results?.rowCount ? '' : 'No data found with id ' + ctx.params.id
+        error: results?.rowCount ? null : 'No data found with id ' + ctx.params.id
     }
     
 }

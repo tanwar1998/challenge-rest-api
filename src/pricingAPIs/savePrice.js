@@ -18,7 +18,8 @@ const savePriceModelData = async(ctx, next) => {
     const results = await DBQuery('INSERT INTO pricingmodel (name, isDefault ) VALUES ($1, $2) RETURNING *', [price.name, price.isDefault ? true: false]);  
     return {
         data: results?.rows ? results.rows[0].id : {},
-        status: results ? 'success': 'error'
+        status: results ? 'success': 'error',
+        error: results?.rows ? null : 'Some internal error, please try again'
     }
     
 }
@@ -52,7 +53,8 @@ export const savePriceForPriceModel = async(ctx, next) => {
     const results = await DBQuery('INSERT INTO prices (name, price, value, pricemodelid) VALUES ($1, $2, $3, $4) RETURNING *', [price.name, price.price, price.value, ctx.params.id]);  
     return {
         data: results?.rows ? results.rows[0]?.priceid : {},
-        status: results ? 'success': 'error'
+        status: results ? 'success': 'error',
+        error: results?.rows ? null : 'Some internal error, please try again'
     }
     
 }

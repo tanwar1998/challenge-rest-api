@@ -8,7 +8,7 @@ const deleteMachineData = async(ctx, next) => {
     return {
         data: results?.rowCount ? {} : null ,
         status: results?.rowCount ? 'success': 'error',
-        error: results?.rowCount ? '' : 'No data found with pmID ' + ctx.params.pmID + ' and machineID ' + ctx.params.machineID
+        error: results?.rowCount ? null : 'No data found with pmID ' + ctx.params.pmID + ' and machineID ' + ctx.params.machineID
     }
 }
 

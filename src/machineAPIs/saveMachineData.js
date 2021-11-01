@@ -15,7 +15,8 @@ const savePriceModelData = async(ctx, next) => {
     const results = await DBQuery('INSERT INTO machines (name) VALUES ($1) RETURNING *', [price.name]);  
     return {
         data: results?.rows ? results.rows[0].id : {},
-        status: results ? 'success': 'error'
+        status: results ? 'success': 'error',
+        error: results?.rows ? null : 'Some internal error, please try again'
     }    
 }
 export default savePriceModelData;

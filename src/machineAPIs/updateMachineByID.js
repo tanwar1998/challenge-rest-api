@@ -21,7 +21,7 @@ const updateMachineByID = async(ctx, next) => {
     return {
         data: results?.rowCount ? {} : null ,
         status: results ? 'success': 'error',
-        error: results?.rowCount ? '' : 'No data found with id ' + ctx.params.machineID
+        error: results?.rowCount ? null : 'No data found with id ' + ctx.params.machineID
     }
     
 }

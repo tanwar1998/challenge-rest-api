@@ -42,7 +42,8 @@ const getPricingModelList = async(ctx, next) => {
       }
       return {
           data: returnData,
-          status: otherPriceModelList ? 'success': 'error'
+          status: otherPriceModelList ? 'success': 'error',
+          error: results?.rows ? null : 'Some internal error'
       }
 }
 
@@ -58,7 +59,7 @@ export const getPricingModelByID = async(ctx, next) => {
     return {
         data: resultFinalList,
         status: results ? 'success': 'error',
-        error: results?.rows?.length ? null : 'No Data found'
+        error: results?.rows ? null : 'Some internal error'
     }
 }
 
@@ -67,9 +68,9 @@ export const getPricesList = async(ctx, next) => {
     const results = await DBQuery(`Select name, value, price from prices where pricemodelid=${ctx.params.id} and deleted != true`, []);
     
     return {
-        data: results?.rows?.length ? results.rows : {},
+        data: results?.rows?.length ? results.rows : [],
         status: results ? 'success': 'error',
-        error: results?.rows?.length ? null : 'No Data found'
+        error: results?.rows ? null : 'Some internal error'
     }
 }
 

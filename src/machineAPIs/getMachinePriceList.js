@@ -16,7 +16,8 @@ const getMachinePriceList = async(ctx, next) => {
       const priceList = await DBQuery(`Select name, value, price from prices where pricemodelid=${machineList?.rows[0]?.pricingid} and deleted != true`, []);
       return {
           data: priceList?.rows,
-          status: priceList?.rows ? 'success': 'error'
+          status: priceList?.rows ? 'success': 'error',
+          error: priceList?.rows ? null : 'Some internal error'
       }
 }
 
